@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "contactbook-app-angular"
+    }
+  },
+  "defaultProject": "contactbook-app-angular",
+  "cli": {
+    "analytics": false
+  }
 }
