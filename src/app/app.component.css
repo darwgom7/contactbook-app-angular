@@ -1,10 +1,11 @@
 .navbar-brand {
-  width: 80%;
+  width: 90%;
   margin: auto;
 }
 
 .is-owner {
   background-color: rgb(19, 31, 50);
+  color: rgb(184, 187, 191);
 }
 
 .is-guest {
@@ -26,6 +27,7 @@
 }
 
 .container {
-  width: 80%;
+  width: 90%;
   margin: auto;
 }
+

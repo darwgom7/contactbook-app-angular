@@ -1,9 +1,9 @@
 export interface Contact {
   name: string
   phone: string
-  birthday: Date
+  birth: Date
   address: string
   email: string
-  __v: number
-  _id: string
+  __v?: number
+  _id?: string
 }
