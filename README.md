@@ -1,6 +1,6 @@
 # ContactbookAppAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
+Aplicación de agenda de contactos desarrollado en [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
 
 # Demo
 https://contactbook-app-angular.vercel.app/
