@@ -82,6 +82,7 @@ export class ContactComponent implements OnInit {
         res => {
           this.getContacts()
           form.reset()
+          this.isWrong = true
           console.log(res)
         },
         err => console.log(err)
