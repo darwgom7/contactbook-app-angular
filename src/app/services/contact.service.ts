@@ -22,4 +22,10 @@ export class ContactService {
   addContact(contact: Contact) {
     return this.http.post(this.URL_API, contact)
   }
+  updateContact(contact: Contact) {
+    return this.http.put(`${this.URL_API}/${contact._id}`, contact)
+  }
+  deleteContact(_id: string) {
+    return this.http.delete(`${this.URL_API}/${_id}`)
+  }
 }

@@ -1,7 +1,7 @@
 export interface Contact {
   name: string
   phone: string
-  birth: Date
+  birth: string
   address: string
   email: string
   __v?: number

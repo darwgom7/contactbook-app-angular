@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../../services/contact.service'
 import { NgForm } from '@angular/forms'
+import { Contact } from 'src/app/models/contact';
 
 @Component({
   selector: 'app-contact',
@@ -8,11 +9,14 @@ import { NgForm } from '@angular/forms'
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-
+  filteredName: string
   constructor(public contactService: ContactService) { }
 
   ngOnInit(): void {
     this.getContacts()
+  }
+  resetForm(form: NgForm) {
+    form.reset()
   }
   getContacts() {
     this.contactService.getContacts().subscribe(
@@ -24,16 +28,35 @@ export class ContactComponent implements OnInit {
   }
   addContact(form: NgForm) {
     //console.log(form.value)
-    this.contactService.addContact(form.value).subscribe(
+    if (form.value._id) {
+      this.contactService.updateContact(form.value).subscribe(
+        res => {
+          console.log(res)
+        },
+        err => console.log(err)
+      )
+    } else {
+      this.contactService.addContact(form.value).subscribe(
+        res => {
+          this.getContacts()
+          form.reset()
+          console.log(res)
+        },
+        err => console.log(err)
+      )
+    }
+  }
+  deleteContact(id: string) {
+    this.contactService.deleteContact(id).subscribe(
       res => {
         this.getContacts()
-        form.reset()
         console.log(res)
       },
       err => console.log(err)
     )
   }
-  deleteContact() {
-    console.log('Deleting contact...')
+  editContact(contact: Contact) {
+    //console.log('Updating', contact)
+    this.contactService.selectedContact = contact
   }
 }

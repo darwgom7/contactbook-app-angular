@@ -9,3 +9,7 @@
   display: flex;
   column-gap: .2rem;
 }
+.container-button {
+  display: flex;
+  column-gap: .2rem;
+}
