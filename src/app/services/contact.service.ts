@@ -6,6 +6,7 @@ import { Contact } from '../models/contact'
 })
 export class ContactService {
   URL_API = 'http://localhost:3000/api/contacts'
+  //URL_API = 'https://contactbook-app-api-goy7adjnv.vercel.app/api/contacts'
   selectedContact: Contact = {
     name: '',
     phone: '',
