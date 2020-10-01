@@ -1,0 +1,15 @@
+.form {
+  padding: .6rem;
+  box-shadow: 0 .2rem .5rem 0 rgba(0, 0, 0, .2);
+}
+.table-container {
+  box-shadow: 0 .2rem .5rem 0 rgba(0, 0, 0, .2);
+}
+.operation-container {
+  display: flex;
+  column-gap: .2rem;
+}
+.container-button {
+  display: flex;
+  column-gap: .2rem;
+}

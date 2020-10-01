@@ -1,0 +1,132 @@
+<div class="columns">
+  <div class="column is-one-quarter">
+    <form
+      #contactForm="ngForm"
+      (ngSubmit)="addContact(contactForm)"
+      class="form"
+    >
+    <input
+    name="_id"
+    type="hidden"
+    [(ngModel)]="contactService.selectedContact._id"
+  />
+      <div class="field">
+        <label class="label">Nombre</label>
+        <div class="control">
+          <input
+            name="name"
+            [(ngModel)]="contactService.selectedContact.name"
+            class="input"
+            type="text"
+            placeholder="Ingrese un nombre"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Telefono</label>
+        <div class="control">
+          <input
+            name="phone"
+            [(ngModel)]="contactService.selectedContact.phone"
+            class="input"
+            type="text"
+            placeholder="Ingrese un telefono"
+          />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Fecha de nacimiento</label>
+        <div class="control">
+          <input
+            name="birth"
+            [(ngModel)]="contactService.selectedContact.birth"
+            class="input"
+            type="date"
+            placeholder="Ingrese la fecha de nacimiento"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Dirección</label>
+        <div class="control">
+          <input
+            name="address"
+            [(ngModel)]="contactService.selectedContact.address"
+            class="input"
+            type="text"
+            placeholder="Ingrese la fecha de nacimiento"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Correo</label>
+        <div class="control">
+          <input
+            name="email"
+            [(ngModel)]="contactService.selectedContact.email"
+            class="input"
+            type="email"
+            placeholder="Ingrese un correo"
+          />
+        </div>
+      </div>
+      <div class="container-button">
+        <button (click)="resetForm(contactForm)" class="button">Limpiar</button>
+        <button class="button is-info">Enviar</button>
+      </div>
+    </form>
+  </div>
+  <div class="column">
+    <div class="table-container">
+      <div class="field">
+        <div class="control">
+          <input
+            name="name"
+            [(ngModel)]="filteredName"
+            class="input"
+            type="text"
+            placeholder="Buscar por nombre"
+          />
+        </div>
+      </div>
+      <table class="table is-striped is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th>Nombres</th>
+            <th>Teléfono</th>
+            <th>Nacimiento</th>
+            <th>Dirección</th>
+            <th>Correo</th>
+            <th>Operaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let contact of contactService.contacts">
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.phone }}</td>
+            <td>{{ contact.birth }}</td>
+            <td>{{ contact.address }}</td>
+            <td>{{ contact.email }}</td>
+            <td class="operation-container">
+              <button
+                (click)="editContact(contact)"
+                class="button is-info is-small"
+              >
+                <i class="material-icons">edit</i>
+              </button>
+              <button
+                (click)="deleteContact(contact._id)"
+                class="button is-danger is-small"
+              >
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
