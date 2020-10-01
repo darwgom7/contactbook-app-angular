@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../../services/contact.service'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
+import { NgForm } from '@angular/forms'
 import { Contact } from 'src/app/models/contact';
 
 @Component({
@@ -13,7 +13,6 @@ export class ContactComponent implements OnInit {
   filteredEmail: string
   birthday: number
   isWrong: boolean = true
-  controlForm: FormGroup
   constructor(public contactService: ContactService) {
   }
 
@@ -21,7 +20,6 @@ export class ContactComponent implements OnInit {
     this.getContacts()
   }
   validateData() {
-    console.log(this.contactService.selectedContact.name)
     if (this.contactService.selectedContact.name !== ''
       && this.contactService.selectedContact.email !== ''
       && this.contactService.selectedContact.phone !== ''
@@ -57,6 +55,7 @@ export class ContactComponent implements OnInit {
   resetForm(form: NgForm) {
     this.getContacts()
     form.reset()
+    this.isWrong = true
   }
   getContacts() {
     this.contactService.getContacts().subscribe(
@@ -67,13 +66,13 @@ export class ContactComponent implements OnInit {
     )
   }
   addContact(form: NgForm) {
-    //console.log(form.value)
     if (form.value._id) {
       this.contactService.updateContact(form.value).subscribe(
         res => {
           console.log(res)
           this.getContacts()
           form.reset()
+          this.isWrong = true
         },
         err => console.log(err)
       )
@@ -99,7 +98,6 @@ export class ContactComponent implements OnInit {
     )
   }
   editContact(contact: Contact) {
-    //console.log('Updating', contact)
     this.contactService.selectedContact = contact
   }
 }

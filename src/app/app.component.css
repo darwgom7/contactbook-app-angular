@@ -42,3 +42,22 @@
   width: 100%;
   bottom: 0;
 }
+.nav-container {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+.nav-star {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.is-link {
+  display: inline;
+  color: rgb(184, 187, 191);
+}
+
+.is-link:hover {
+  text-decoration: underline;
+}
