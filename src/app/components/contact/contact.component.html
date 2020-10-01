@@ -1,0 +1,36 @@
+<div class="columns">
+  <div class="column is-two-fifths">
+
+  </div>
+  <div class="column">
+    <div class="table-container">
+      <table class="table is-striped is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th>Nombre completo</th>
+            <th>Teléfono</th>
+            <th>Nacimiento</th>
+            <th>Correo</th>
+            <th>Operaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let contact of contactService.contacts">
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.phone }}</td>
+            <td>{{ contact.birthday }}</td>
+            <td>{{ contact.email }}</td>
+            <td>
+              <button class="button is-info is-small">
+                <i class="material-icons">edit</i>
+              </button>
+              <button class="button is-danger is-small">
+                <i class="material-icons">delete</i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
