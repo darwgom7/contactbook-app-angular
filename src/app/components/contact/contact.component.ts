@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../../services/contact.service'
-import { NgForm } from '@angular/forms'
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'
 import { Contact } from 'src/app/models/contact';
 
 @Component({
@@ -10,12 +10,52 @@ import { Contact } from 'src/app/models/contact';
 })
 export class ContactComponent implements OnInit {
   filteredName: string
-  constructor(public contactService: ContactService) { }
+  filteredEmail: string
+  birthday: number
+  isWrong: boolean = true
+  controlForm: FormGroup
+  constructor(public contactService: ContactService) {
+  }
 
   ngOnInit(): void {
     this.getContacts()
   }
+  validateData() {
+    console.log(this.contactService.selectedContact.name)
+    if (this.contactService.selectedContact.name !== ''
+      && this.contactService.selectedContact.email !== ''
+      && this.contactService.selectedContact.phone !== ''
+      && this.contactService.selectedContact.address !== ''
+    ) {
+      this.isWrong = false
+    } else {
+      this.isWrong = true
+    }
+  }
+  searchByName() {
+    if (this.filteredName != '') {
+      this.contactService.contacts = this.contactService.contacts.filter(res => {
+        return res.name.toLowerCase().match(this.filteredName.toLowerCase())
+      })
+    } else if (this.filteredName == '') {
+      this.ngOnInit()
+    }
+  }
+  searchByEmail() {
+    if (this.filteredEmail != '') {
+      this.contactService.contacts = this.contactService.contacts.filter(res => {
+        return res.email.toLowerCase().match(this.filteredEmail.toLowerCase())
+      })
+    } else if (this.filteredEmail == '') {
+      this.ngOnInit()
+    }
+  }
+  calcAge(date: string) {
+    this.birthday = +new Date(date);
+    return ~~((Date.now() - this.birthday) / (31557600000));
+  }
   resetForm(form: NgForm) {
+    this.getContacts()
     form.reset()
   }
   getContacts() {
@@ -32,6 +72,8 @@ export class ContactComponent implements OnInit {
       this.contactService.updateContact(form.value).subscribe(
         res => {
           console.log(res)
+          this.getContacts()
+          form.reset()
         },
         err => console.log(err)
       )
@@ -40,6 +82,7 @@ export class ContactComponent implements OnInit {
         res => {
           this.getContacts()
           form.reset()
+          this.isWrong = true
           console.log(res)
         },
         err => console.log(err)

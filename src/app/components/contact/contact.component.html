@@ -5,17 +5,18 @@
       (ngSubmit)="addContact(contactForm)"
       class="form"
     >
-    <input
-    name="_id"
-    type="hidden"
-    [(ngModel)]="contactService.selectedContact._id"
-  />
+      <input
+        name="_id"
+        type="hidden"
+        [(ngModel)]="contactService.selectedContact._id"
+      />
       <div class="field">
         <label class="label">Nombre</label>
         <div class="control">
           <input
             name="name"
             [(ngModel)]="contactService.selectedContact.name"
+            (input)="validateData()"
             class="input"
             type="text"
             placeholder="Ingrese un nombre"
@@ -29,6 +30,7 @@
           <input
             name="phone"
             [(ngModel)]="contactService.selectedContact.phone"
+            (input)="validateData()"
             class="input"
             type="text"
             placeholder="Ingrese un telefono"
@@ -41,8 +43,11 @@
           <input
             name="birth"
             [(ngModel)]="contactService.selectedContact.birth"
+            (input)="validateData()"
             class="input"
             type="date"
+            min="1920-02-20"
+            max="2014-01-10"
             placeholder="Ingrese la fecha de nacimiento"
           />
         </div>
@@ -54,6 +59,7 @@
           <input
             name="address"
             [(ngModel)]="contactService.selectedContact.address"
+            (input)="validateData()"
             class="input"
             type="text"
             placeholder="Ingrese la fecha de nacimiento"
@@ -67,30 +73,38 @@
           <input
             name="email"
             [(ngModel)]="contactService.selectedContact.email"
+            (input)="validateData()"
             class="input"
             type="email"
             placeholder="Ingrese un correo"
           />
         </div>
       </div>
-      <div class="container-button">
-        <button (click)="resetForm(contactForm)" class="button">Limpiar</button>
-        <button class="button is-info">Enviar</button>
+      <div class="button-container">
+        <a (click)="resetForm(contactForm)" class="button">Limpiar</a>
+        <button [disabled]="isWrong" class="button is-info">Enviar</button>
       </div>
     </form>
   </div>
   <div class="column">
     <div class="table-container">
-      <div class="field">
-        <div class="control">
-          <input
-            name="name"
-            [(ngModel)]="filteredName"
-            class="input"
-            type="text"
-            placeholder="Buscar por nombre"
-          />
-        </div>
+      <div class="filter-container">
+        <input
+          name="name"
+          [(ngModel)]="filteredName"
+          (input)="searchByName()"
+          class="input is-small is-narrow"
+          type="text"
+          placeholder="Buscar por nombre"
+        />
+        <input
+          name="name"
+          [(ngModel)]="filteredEmail"
+          (input)="searchByEmail()"
+          class="input is-small is-narrow"
+          type="text"
+          placeholder="Buscar por correo"
+        />
       </div>
       <table class="table is-striped is-hoverable is-fullwidth">
         <thead>
@@ -98,6 +112,7 @@
             <th>Nombres</th>
             <th>Teléfono</th>
             <th>Nacimiento</th>
+            <th>Edad</th>
             <th>Dirección</th>
             <th>Correo</th>
             <th>Operaciones</th>
@@ -108,6 +123,7 @@
             <td>{{ contact.name }}</td>
             <td>{{ contact.phone }}</td>
             <td>{{ contact.birth }}</td>
+            <td>{{ calcAge(contact.birth) }}</td>
             <td>{{ contact.address }}</td>
             <td>{{ contact.email }}</td>
             <td class="operation-container">
