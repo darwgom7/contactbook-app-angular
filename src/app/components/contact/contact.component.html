@@ -62,7 +62,7 @@
             (input)="validateData()"
             class="input"
             type="text"
-            placeholder="Ingrese la fecha de nacimiento"
+            placeholder="Ingrese la dirección"
           />
         </div>
       </div>
@@ -81,7 +81,7 @@
         </div>
       </div>
       <div class="button-container">
-        <a (click)="resetForm(contactForm)" class="button">Limpiar</a>
+        <a (click)="resetForm()" class="button">Limpiar</a>
         <button [disabled]="isWrong" class="button is-info">Enviar</button>
       </div>
     </form>

@@ -10,7 +10,7 @@ export class ContactService {
   selectedContact: Contact = {
     name: '',
     phone: '',
-    birth: null,
+    birth: '',
     address: '',
     email: ''
   };
