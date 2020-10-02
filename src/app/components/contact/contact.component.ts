@@ -21,8 +21,9 @@ export class ContactComponent implements OnInit {
   }
   validateData() {
     if (this.contactService.selectedContact.name !== ''
-      && this.contactService.selectedContact.email !== ''
       && this.contactService.selectedContact.phone !== ''
+      && this.contactService.selectedContact.birth !== ''
+      && this.contactService.selectedContact.email !== ''
       && this.contactService.selectedContact.address !== ''
     ) {
       this.isWrong = false
@@ -52,9 +53,14 @@ export class ContactComponent implements OnInit {
     this.birthday = +new Date(date);
     return ~~((Date.now() - this.birthday) / (31557600000));
   }
-  resetForm(form: NgForm) {
+  resetForm() {
     this.getContacts()
-    form.reset()
+    //form.reset()
+    this.contactService.selectedContact.name = ''
+    this.contactService.selectedContact.phone = ''
+    this.contactService.selectedContact.birth = ''
+    this.contactService.selectedContact.email = ''
+    this.contactService.selectedContact.address = ''
     this.isWrong = true
   }
   getContacts() {
